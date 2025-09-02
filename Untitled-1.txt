@@ -1,0 +1,25 @@
+cd /d "%USERPROFILE%\Projects\gdpr-micro-auditor"
+REM Φάκελοι
+mkdir agents tools docs tests
+
+REM Ριζικά αρχεία
+type nul > app.py
+type nul > graph.py
+type nul > config.py
+type nul > requirements.txt
+type nul > .env.example
+
+REM Agents
+type nul > agents\router.py
+type nul > agents\worker.py
+
+REM Tools
+type nul > tools\docs_rag.py
+type nul > tools\pii_checker.py
+
+REM Docs (δείγματα για το RAG)
+type nul > docs\gdpr_notes.md
+type nul > docs\checklist.md
+
+REM Tests
+type nul > tests\scenarios.md
