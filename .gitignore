@@ -1,10 +1,28 @@
+# env & secrets
+.venv/
 .env
-__pycache__
+
+# python bytecode / caches
+__pycache__/
 *.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+*.egg-info/
+coverage.xml
+.coverage
+
+# editors / os
+.vscode/
+.idea/
 .DS_Store
-.pytest_cache
-.env
-__pycache__
-*.pyc
-.DS_Store
-.pytest_cache
+Thumbs.db
+
+# builds / artifacts
+build/
+dist/
+*.log
+*.tmp
+*.zip

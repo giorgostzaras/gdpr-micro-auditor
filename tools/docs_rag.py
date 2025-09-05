@@ -2,6 +2,9 @@ import os, re
 from typing import List
 from rank_bm25 import BM25Okapi
 
+
+
+
 _snippets: List[str] = []
 _bm25 = None
 
@@ -9,6 +12,15 @@ _bm25 = None
 RETENTION_HINTS = [
     "διατήρησ", "retention", "χρον", "διάρκ", "ανωνυμο", "διαγραφ", "περίοδος"
 ]
+
+def _expand_query(q: str) -> str:
+    s = (q or "").lower()
+    extra = []
+    if "ελαχισ" in s:
+        extra += ["data minimization", "ελαχιστοποίηση δεδομένων"]
+    if "διατήρησ" in s or "περίοδο" in s or "retention" in s:
+        extra += ["data retention"]
+    return (q + " " + " ".join(extra)).strip()
 
 def _tokenize(text: str) -> List[str]:
     # Απλά tokens με ελληνικά
@@ -97,7 +109,7 @@ def docs_search(query: str, top_k: int = 3) -> List[str]:
     _ensure_index()
     if not _bm25 or not _snippets:
         return []
-    q_tokens = _tokenize(query)
+    q_tokens = _tokenize(_expand_query(query))
     scores = _bm25.get_scores(q_tokens)
     idxs = sorted(range(len(scores)), key=lambda i: scores[i], reverse=True)[:max(1, top_k)]
     results = []
